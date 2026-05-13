@@ -1,0 +1,41 @@
+services:
+  # 1. API Server (Web Service)
+  - type: web
+    name: sami-portfolio-api
+    env: node
+    plan: free
+    buildCommand: pnpm install && pnpm -F @workspace/db run push && pnpm -F @workspace/api-server run build
+    startCommand: pnpm -F @workspace/api-server run start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sami-portfolio-db
+          property: connectionString
+      - key: GMAIL_USER
+        sync: false # Set this in Render Dashboard
+      - key: GMAIL_APP_PASSWORD
+        sync: false # Set this in Render Dashboard
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+
+  # 2. Portfolio Frontend (Static Site)
+  - type: static
+    name: sami-portfolio-frontend
+    env: static
+    plan: free
+    buildCommand: pnpm install && pnpm -F @workspace/portfolio run build
+    staticPublishPath: artifacts/portfolio/dist/public
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: sami-portfolio-api
+          property: host
+        # Note: You might need to prepend https:// in the Render dashboard 
+        # or use the full URL if 'host' is not enough.
+
+databases:
+  - name: sami-portfolio-db
+    plan: free

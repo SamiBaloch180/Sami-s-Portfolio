@@ -5,8 +5,14 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Projects from "@/pages/projects";
+import { setBaseUrl } from "@workspace/api-client-react";
 
 const queryClient = new QueryClient();
+
+// Configure API base URL for production
+if (import.meta.env.VITE_API_URL) {
+  setBaseUrl(import.meta.env.VITE_API_URL);
+}
 
 function Router() {
   return (
