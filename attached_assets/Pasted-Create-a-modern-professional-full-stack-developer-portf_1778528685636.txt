@@ -1,0 +1,91 @@
+Create a modern, professional full-stack developer portfolio website for **Sami Hassan**, a Full Stack Developer.
+
+## Tech Stack:
+
+* Frontend: React (Vite) + Tailwind CSS
+* Data Fetching: React Query (TanStack Query)
+* Backend: Node.js + Express.js (optional but preferred)
+* Database: supabase (for contact form)
+* Language: JavaScript + TypeScript (preferred)
+
+## Design Requirements:
+
+* Clean, modern, minimal UI (dark theme)
+* Fully responsive (mobile + desktop)
+* Smooth scrolling and subtle animations
+* Use professional typography and spacing
+* Section-based layout (single page)
+
+## Sections Required:
+
+### 1. Navbar
+
+* Logo/Name: Sami Hassan
+* Links: Home, About, Tech Stack, Contact
+* Sticky navbar with smooth scroll
+
+### 2. Hero Section
+
+* Heading: "Hi, I'm Sami Hassan"
+* Subheading: "Full Stack Developer"
+* Tagline: "I build scalable web applications using modern technologies"
+* Buttons:
+
+  * View Projects (scroll)
+  * Contact Me
+
+### 3. About Section
+
+* Short professional introduction
+* Focus on skills, passion, and development journey
+
+### 4. Tech Stack Section (IMPORTANT)
+
+Display skills in categorized grid cards:
+
+Frontend:
+
+* JavaScript, TypeScript, React, Tailwind CSS
+
+Backend:
+
+* Node.js, Express.js
+
+Database & Cloud:
+
+* MongoDB, Firebase
+
+Tools & DevOps:
+
+* Docker, Git, Postman
+
+Each skill should appear as a card with hover effects.
+
+### 5. Contact Section
+
+* Form fields:
+
+  * Name
+  * Email
+  * Message
+* Submit button
+* Integrate with backend API (or mock API)
+* Show success/error states
+
+### 6. Footer
+
+* Copyright: © 2026 Sami Hassan
+* Social links (GitHub, LinkedIn)
+
+## Functional Requirements:
+
+* Use React Query for:
+
+  * Handling contact form submission (useMutation)
+* Axios for API calls
+* Proper error handling and loading states
+* Clean and modular component structure
+
+## Goal:
+
+The final result should look like a real professional developer portfolio that is clean, visually appealing, and job-ready.
