@@ -38,8 +38,9 @@ export default function Home() {
           toast({ title: "Message sent", description: "Thanks for reaching out! I'll get back to you soon." });
           form.reset();
         },
-        onError: () => {
-          toast({ title: "Error", description: "Failed to send message. Please try again later.", variant: "destructive" });
+        onError: (err: any) => {
+          const errorMessage = err?.data?.error || err?.message || "Failed to send message. Please try again later.";
+          toast({ title: "Error", description: errorMessage, variant: "destructive" });
         },
       }
     );
