@@ -20,6 +20,12 @@ function createTransporter() {
 }
 
 contactRouter.post("/contact", async (req: any, res: any) => {
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+    req.log.error("Missing Gmail environment variables (GMAIL_USER or GMAIL_APP_PASSWORD)");
+    res.status(500).json({ error: "Email configuration is missing" });
+    return;
+  }
+
   const parsed = SubmitContactBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid request body" });
