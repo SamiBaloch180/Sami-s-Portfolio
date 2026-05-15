@@ -17,5 +17,11 @@
     "@types/pino-http": "^6.1.0",
     "prettier": "^3.8.1",
     "typescript": "~5.9.2"
+  },
+  "dependencies": {
+    "cors": "^2",
+    "express": "^5.2.1",
+    "nodemailer": "^8.0.7",
+    "zod": "catalog:"
   }
 }
