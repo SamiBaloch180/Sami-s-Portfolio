@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import healthRouter from "../artifacts/api-server/src/routes/health";
-import contactRouter from "../artifacts/api-server/src/routes/contact";
+import healthRouter from "../artifacts/api-server/src/routes/health.js";
+import contactRouter from "../artifacts/api-server/src/routes/contact.js";
 
 const app = (express as any)();
 
