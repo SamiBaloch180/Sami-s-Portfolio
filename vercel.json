@@ -3,14 +3,13 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/index.js"
+      "destination": "/api/index.ts"
     }
   ],
   "functions": {
-    "api/index.js": {
+    "api/index.ts": {
       "memory": 1024,
-      "maxDuration": 30,
-      "includeFiles": "artifacts/api-server/dist/**"
+      "maxDuration": 30
     }
   }
 }
