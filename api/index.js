@@ -1,7 +1,7 @@
-import express from "express";
-import cors from "cors";
-import nodemailer from "nodemailer";
-import { z } from "zod";
+const express = require("express");
+const cors = require("cors");
+const nodemailer = require("nodemailer");
+const { z } = require("zod");
 
 // Redefine the schema here to avoid workspace import issues
 const SubmitContactBody = z.object({
@@ -10,7 +10,7 @@ const SubmitContactBody = z.object({
   message: z.string().min(1),
 });
 
-const app = (express as any)();
+const app = express();
 
 app.use(cors());
 app.use(express.json());
@@ -23,8 +23,10 @@ router.get("/healthz", (req, res) => {
 });
 
 router.post("/contact", async (req, res) => {
-  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+  const GMAIL_USER = process.env.GMAIL_USER;
+  const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD;
 
+  if (!GMAIL_USER || !GMAIL_APP_PASSWORD) {
     console.error("Missing Gmail environment variables");
     return res.status(500).json({ error: "Email configuration is missing" });
   }
@@ -42,14 +44,14 @@ router.post("/contact", async (req, res) => {
       port: 465,
       secure: true,
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
+        user: GMAIL_USER,
+        pass: GMAIL_APP_PASSWORD,
       },
     });
 
     await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.GMAIL_USER}>`,
-      to: process.env.GMAIL_USER,
+      from: `"Portfolio Contact" <${GMAIL_USER}>`,
+      to: GMAIL_USER,
       replyTo: email,
       subject: `New message from ${name} — Portfolio`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
@@ -67,6 +69,4 @@ router.post("/contact", async (req, res) => {
 app.use("/api", router);
 app.use("/", router);
 
-export default app;
-// @ts-ignore
 module.exports = app;
