@@ -19,7 +19,7 @@ function createTransporter() {
   });
 }
 
-contactRouter.post("/contact", async (req, res) => {
+contactRouter.post("/contact", async (req: any, res: any) => {
   const parsed = SubmitContactBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid request body" });
