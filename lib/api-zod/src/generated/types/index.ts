@@ -6,7 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export * from "./apiError";
-export * from "./contactInput";
-export * from "./contactMessage";
-export * from "./healthStatus";
+export * from "./apiError.js";
+export * from "./contactInput.js";
+export * from "./contactMessage.js";
+export * from "./healthStatus.js";
