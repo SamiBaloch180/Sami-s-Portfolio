@@ -1,2 +1,2 @@
-import app from "../artifacts/api-server/src/app.js";
+import app from "../artifacts/api-server/dist/app.mjs";
 export default app;
