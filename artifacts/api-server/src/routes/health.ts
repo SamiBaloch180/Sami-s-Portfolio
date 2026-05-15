@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { HealthCheckResponse } from "../../../lib/api-zod/src/index.js";
+import { HealthCheckResponse } from "../../../../lib/api-zod/src/index";
 
 const router = Router();
 

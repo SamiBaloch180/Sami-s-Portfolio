@@ -1,6 +1,6 @@
 import { Router } from "express";
 import nodemailer from "nodemailer";
-import { SubmitContactBody } from "../../../lib/api-zod/src/index.js";
+import { SubmitContactBody } from "../../../../lib/api-zod/src/index";
 
 const contactRouter = Router();
 
