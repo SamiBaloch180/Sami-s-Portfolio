@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -9,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Github, Linkedin, Mail, Code2, Server, Database, Wrench, ArrowRight, ExternalLink, Moon } from "lucide-react";
+import { Github, Linkedin, Mail, Code2, Server, Database, Wrench, ArrowRight, ExternalLink, Moon, Sun } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Badge } from "@/components/ui/badge";
 import { SiJavascript, SiTypescript, SiReact, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb, SiFirebase, SiDocker, SiGit, SiPostman } from "react-icons/si";
@@ -112,6 +113,28 @@ const contactSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactSchema>;
 
+
+const skillCategories = {
+  Frontend: [
+    { name: 'React/Next.js', percent: 95, color: 'bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]' },
+    { name: 'TypeScript', percent: 90, color: 'bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.5)]' },
+    { name: 'Tailwind CSS', percent: 92, color: 'bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)]' },
+    { name: 'Framer Motion', percent: 88, color: 'bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]' },
+  ],
+  Backend: [
+    { name: 'Node.js', percent: 90, color: 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' },
+    { name: 'Express.js', percent: 85, color: 'bg-gray-400 shadow-[0_0_10px_rgba(156,163,175,0.5)]' },
+    { name: 'MongoDB', percent: 88, color: 'bg-green-600 shadow-[0_0_10px_rgba(22,163,74,0.5)]' },
+    { name: 'PostgreSQL', percent: 80, color: 'bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.5)]' },
+  ],
+  Design: [
+    { name: 'Figma', percent: 90, color: 'bg-pink-500 shadow-[0_0_10px_rgba(236,72,153,0.5)]' },
+    { name: 'UI/UX Principles', percent: 85, color: 'bg-purple-400 shadow-[0_0_10px_rgba(192,132,252,0.5)]' },
+    { name: 'Responsive Design', percent: 95, color: 'bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.5)]' },
+    { name: 'Prototyping', percent: 88, color: 'bg-orange-400 shadow-[0_0_10px_rgba(251,146,60,0.5)]' },
+  ]
+};
+
 export default function Home() {
   const { toast } = useToast();
   const submitContactMutation = useSubmitContact();
@@ -160,10 +183,11 @@ export default function Home() {
           ))}
         </div>
         <button 
-          className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-yellow-500 hover:bg-white/10 transition-colors flex-shrink-0"
+          onClick={toggleTheme}
+          className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-yellow-500 hover:bg-black/10 dark:hover:bg-white/10 transition-colors flex-shrink-0"
           aria-label="Toggle theme"
         >
-          <Moon className="w-4 h-4 fill-current" />
+          {theme === 'dark' ? <Moon className="w-4 h-4 fill-current" /> : <Sun className="w-4 h-4 fill-current text-orange-500" />}
         </button>
       </nav>
 
