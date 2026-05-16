@@ -136,6 +136,32 @@ const skillCategories = {
 };
 
 export default function Home() {
+  const [activeSkillTab, setActiveSkillTab] = useState<keyof typeof skillCategories>('Frontend');
+  const [theme, setTheme] = useState('dark');
+
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains('dark') || 
+                   (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    setTheme(isDark ? 'dark' : 'light');
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    if (newTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      localStorage.theme = 'dark';
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.theme = 'light';
+    }
+  };
+
   const { toast } = useToast();
   const submitContactMutation = useSubmitContact();
 
