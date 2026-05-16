@@ -199,8 +199,7 @@ export default function Home() {
         </div>
 
         {/* Mobile Menu Toggle */}
-        <div className="md:hidden flex items-center justify-between w-[60vw] max-w-[280px]">
-          <span className="text-sm font-semibold tracking-widest text-foreground">MENU</span>
+        <div className="md:hidden flex items-center justify-center w-full">
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-1 focus:outline-none hover:text-primary transition-colors"
