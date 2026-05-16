@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
+import { Background3D } from "@/components/Background3D";
+import { TiltCard } from "@/components/TiltCard";
 import { Github, Linkedin, Mail, Code2, Server, Database, Wrench, ArrowRight, ExternalLink } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Badge } from "@/components/ui/badge";
@@ -143,7 +145,8 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30 relative overflow-x-hidden">
+      <Background3D />
       {/* Navbar */}
       <nav className="sticky top-0 z-50 w-full border-b border-white/5 bg-background/80 backdrop-blur-md">
         <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
@@ -218,20 +221,23 @@ export default function Home() {
 
               {/* Photo */}
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.15 }}
+                initial={{ opacity: 0, x: 30, rotateY: 30 }}
+                animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                transition={{ duration: 0.8, delay: 0.15 }}
                 className="flex-shrink-0"
+                style={{ perspective: "1000px" }}
               >
-                <div className="relative">
-                  <div className="absolute -inset-4 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-2xl rounded-3xl" />
-                  <img
-                    src="/sami.png"
-                    alt="Sami Hassan"
-                    className="relative w-64 md:w-80 drop-shadow-2xl"
-                    data-testid="img-hero-photo"
-                  />
-                </div>
+                <TiltCard degree={20}>
+                  <div className="relative">
+                    <div className="absolute -inset-4 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-2xl rounded-3xl" />
+                    <img
+                      src="/sami.png"
+                      alt="Sami Hassan"
+                      className="relative w-64 md:w-80 drop-shadow-2xl"
+                      data-testid="img-hero-photo"
+                    />
+                  </div>
+                </TiltCard>
               </motion.div>
             </div>
           </div>
@@ -315,89 +321,97 @@ export default function Home() {
                 Tech Stack
               </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <Card className="bg-card/50 border-white/10 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
-                      <Code2 className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-4" data-testid="text-category-frontend">Frontend</h3>
-                    <ul className="space-y-3">
-                      {[
-                        { name: 'JavaScript', icon: SiJavascript, color: 'text-yellow-400' },
-                        { name: 'TypeScript', icon: SiTypescript, color: 'text-blue-400' },
-                        { name: 'React', icon: SiReact, color: 'text-cyan-400' },
-                        { name: 'Tailwind CSS', icon: SiTailwindcss, color: 'text-teal-400' },
-                      ].map(tech => (
-                        <li key={tech.name} className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group cursor-default">
-                          <tech.icon className={`w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity ${tech.color}`} />
-                          <span className="font-mono text-sm">{tech.name}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" style={{ perspective: "1000px" }}>
+                <TiltCard>
+                  <Card className="bg-card/50 border-white/10 hover:border-primary/50 transition-all duration-300">
+                    <CardContent className="p-6">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+                        <Code2 className="w-6 h-6 text-primary" />
+                      </div>
+                      <h3 className="text-xl font-semibold mb-4" data-testid="text-category-frontend">Frontend</h3>
+                      <ul className="space-y-3">
+                        {[
+                          { name: 'JavaScript', icon: SiJavascript, color: 'text-yellow-400' },
+                          { name: 'TypeScript', icon: SiTypescript, color: 'text-blue-400' },
+                          { name: 'React', icon: SiReact, color: 'text-cyan-400' },
+                          { name: 'Tailwind CSS', icon: SiTailwindcss, color: 'text-teal-400' },
+                        ].map(tech => (
+                          <li key={tech.name} className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group cursor-default">
+                            <tech.icon className={`w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity ${tech.color}`} />
+                            <span className="font-mono text-sm">{tech.name}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </TiltCard>
 
-                <Card className="bg-card/50 border-white/10 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
-                      <Server className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-4" data-testid="text-category-backend">Backend</h3>
-                    <ul className="space-y-3">
-                      {[
-                        { name: 'Node.js', icon: SiNodedotjs, color: 'text-green-500' },
-                        { name: 'Express.js', icon: SiExpress, color: 'text-gray-300' },
-                      ].map(tech => (
-                        <li key={tech.name} className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group cursor-default">
-                          <tech.icon className={`w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity ${tech.color}`} />
-                          <span className="font-mono text-sm">{tech.name}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+                <TiltCard>
+                  <Card className="bg-card/50 border-white/10 hover:border-primary/50 transition-all duration-300">
+                    <CardContent className="p-6">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+                        <Server className="w-6 h-6 text-primary" />
+                      </div>
+                      <h3 className="text-xl font-semibold mb-4" data-testid="text-category-backend">Backend</h3>
+                      <ul className="space-y-3">
+                        {[
+                          { name: 'Node.js', icon: SiNodedotjs, color: 'text-green-500' },
+                          { name: 'Express.js', icon: SiExpress, color: 'text-gray-300' },
+                        ].map(tech => (
+                          <li key={tech.name} className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group cursor-default">
+                            <tech.icon className={`w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity ${tech.color}`} />
+                            <span className="font-mono text-sm">{tech.name}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </TiltCard>
 
-                <Card className="bg-card/50 border-white/10 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
-                      <Database className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-4" data-testid="text-category-database">Database & Cloud</h3>
-                    <ul className="space-y-3">
-                      {[
-                        { name: 'MongoDB', icon: SiMongodb, color: 'text-green-400' },
-                        { name: 'Firebase', icon: SiFirebase, color: 'text-orange-400' },
-                      ].map(tech => (
-                        <li key={tech.name} className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group cursor-default">
-                          <tech.icon className={`w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity ${tech.color}`} />
-                          <span className="font-mono text-sm">{tech.name}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+                <TiltCard>
+                  <Card className="bg-card/50 border-white/10 hover:border-primary/50 transition-all duration-300">
+                    <CardContent className="p-6">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+                        <Database className="w-6 h-6 text-primary" />
+                      </div>
+                      <h3 className="text-xl font-semibold mb-4" data-testid="text-category-database">Database & Cloud</h3>
+                      <ul className="space-y-3">
+                        {[
+                          { name: 'MongoDB', icon: SiMongodb, color: 'text-green-400' },
+                          { name: 'Firebase', icon: SiFirebase, color: 'text-orange-400' },
+                        ].map(tech => (
+                          <li key={tech.name} className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group cursor-default">
+                            <tech.icon className={`w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity ${tech.color}`} />
+                            <span className="font-mono text-sm">{tech.name}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </TiltCard>
 
-                <Card className="bg-card/50 border-white/10 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
-                      <Wrench className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-4" data-testid="text-category-tools">Tools & DevOps</h3>
-                    <ul className="space-y-3">
-                      {[
-                        { name: 'Docker', icon: SiDocker, color: 'text-blue-500' },
-                        { name: 'Git', icon: SiGit, color: 'text-orange-500' },
-                        { name: 'Postman', icon: SiPostman, color: 'text-orange-600' },
-                      ].map(tech => (
-                        <li key={tech.name} className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group cursor-default">
-                          <tech.icon className={`w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity ${tech.color}`} />
-                          <span className="font-mono text-sm">{tech.name}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+                <TiltCard>
+                  <Card className="bg-card/50 border-white/10 hover:border-primary/50 transition-all duration-300">
+                    <CardContent className="p-6">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+                        <Wrench className="w-6 h-6 text-primary" />
+                      </div>
+                      <h3 className="text-xl font-semibold mb-4" data-testid="text-category-tools">Tools & DevOps</h3>
+                      <ul className="space-y-3">
+                        {[
+                          { name: 'Docker', icon: SiDocker, color: 'text-blue-500' },
+                          { name: 'Git', icon: SiGit, color: 'text-orange-500' },
+                          { name: 'Postman', icon: SiPostman, color: 'text-orange-600' },
+                        ].map(tech => (
+                          <li key={tech.name} className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group cursor-default">
+                            <tech.icon className={`w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity ${tech.color}`} />
+                            <span className="font-mono text-sm">{tech.name}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </TiltCard>
               </div>
             </motion.div>
           </div>
@@ -436,52 +450,54 @@ export default function Home() {
                 >
                   {projects.filter(p => p.featured).map(project => (
                     <motion.div key={project.id} variants={cardVariants}>
-                      <Card
-                        className="bg-card/50 border-white/10 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 group"
-                        data-testid={`card-project-${project.id}`}
-                      >
-                        <CardContent className="p-6 md:p-8">
-                          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                            <div className="flex-1">
-                              <div className="flex items-center gap-3 mb-3">
-                                <Badge variant="outline" className="text-primary border-primary/30 font-mono text-xs">
-                                  {project.category}
-                                </Badge>
-                                <Badge className="bg-primary/10 text-primary border-0 font-mono text-xs">
-                                  Featured
-                                </Badge>
+                      <TiltCard>
+                        <Card
+                          className="bg-card/50 border-white/10 hover:border-primary/40 transition-all duration-300 group"
+                          data-testid={`card-project-${project.id}`}
+                        >
+                          <CardContent className="p-6 md:p-8">
+                            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-3 mb-3">
+                                  <Badge variant="outline" className="text-primary border-primary/30 font-mono text-xs">
+                                    {project.category}
+                                  </Badge>
+                                  <Badge className="bg-primary/10 text-primary border-0 font-mono text-xs">
+                                    Featured
+                                  </Badge>
+                                </div>
+                                <h3 className="text-xl md:text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+                                  {project.title}
+                                </h3>
+                                <p className="text-muted-foreground leading-relaxed mb-5">
+                                  {project.description}
+                                </p>
+                                <div className="flex flex-wrap gap-2">
+                                  {project.tech.map(t => {
+                                    const entry = techIconMap[t];
+                                    return (
+                                      <span key={t} className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-background border border-white/10 text-xs font-mono text-muted-foreground">
+                                        {entry && <entry.icon className={`w-3.5 h-3.5 ${entry.color}`} />}
+                                        {t}
+                                      </span>
+                                    );
+                                  })}
+                                </div>
                               </div>
-                              <h3 className="text-xl md:text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-                                {project.title}
-                              </h3>
-                              <p className="text-muted-foreground leading-relaxed mb-5">
-                                {project.description}
-                              </p>
-                              <div className="flex flex-wrap gap-2">
-                                {project.tech.map(t => {
-                                  const entry = techIconMap[t];
-                                  return (
-                                    <span key={t} className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-background border border-white/10 text-xs font-mono text-muted-foreground">
-                                      {entry && <entry.icon className={`w-3.5 h-3.5 ${entry.color}`} />}
-                                      {t}
-                                    </span>
-                                  );
-                                })}
+                              <div className="flex md:flex-col gap-3 md:items-end flex-shrink-0">
+                                <a href={project.github} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-sm text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
+                                  <Github className="w-4 h-4" />
+                                  Code
+                                </a>
+                                <a href={project.live} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors">
+                                  <ExternalLink className="w-4 h-4" />
+                                  Live
+                                </a>
                               </div>
                             </div>
-                            <div className="flex md:flex-col gap-3 md:items-end flex-shrink-0">
-                              <a href={project.github} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-sm text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
-                                <Github className="w-4 h-4" />
-                                Code
-                              </a>
-                              <a href={project.live} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors">
-                                <ExternalLink className="w-4 h-4" />
-                                Live
-                              </a>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
+                          </CardContent>
+                        </Card>
+                      </TiltCard>
                     </motion.div>
                   ))}
                 </motion.div>
@@ -501,42 +517,44 @@ export default function Home() {
                 >
                   {projects.filter(p => !p.featured).map(project => (
                     <motion.div key={project.id} variants={cardVariants}>
-                      <Card
-                        className="h-full bg-card/50 border-white/10 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 group"
-                      >
-                        <CardContent className="p-6 flex flex-col h-full">
-                          <div className="flex items-center justify-between mb-4">
-                            <Badge variant="outline" className="text-primary border-primary/30 font-mono text-xs">
-                              {project.category}
-                            </Badge>
-                            <div className="flex items-center gap-2">
-                              <a href={project.github} className="text-muted-foreground hover:text-primary transition-colors">
-                                <Github className="w-4 h-4" />
-                              </a>
-                              <a href={project.live} className="text-muted-foreground hover:text-primary transition-colors">
-                                <ExternalLink className="w-4 h-4" />
-                              </a>
+                      <TiltCard className="h-full">
+                        <Card
+                          className="h-full bg-card/50 border-white/10 hover:border-primary/40 transition-all duration-300 group"
+                        >
+                          <CardContent className="p-6 flex flex-col h-full">
+                            <div className="flex items-center justify-between mb-4">
+                              <Badge variant="outline" className="text-primary border-primary/30 font-mono text-xs">
+                                {project.category}
+                              </Badge>
+                              <div className="flex items-center gap-2">
+                                <a href={project.github} className="text-muted-foreground hover:text-primary transition-colors">
+                                  <Github className="w-4 h-4" />
+                                </a>
+                                <a href={project.live} className="text-muted-foreground hover:text-primary transition-colors">
+                                  <ExternalLink className="w-4 h-4" />
+                                </a>
+                              </div>
                             </div>
-                          </div>
-                          <h4 className="text-lg font-bold mb-3 group-hover:text-primary transition-colors leading-snug">
-                            {project.title}
-                          </h4>
-                          <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
-                            {project.description}
-                          </p>
-                          <div className="flex flex-wrap gap-1.5 mt-auto">
-                            {project.tech.map(t => {
-                              const entry = techIconMap[t];
-                              return (
-                                <span key={t} className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-background border border-white/10 text-xs font-mono text-muted-foreground">
-                                  {entry && <entry.icon className={`w-3 h-3 ${entry.color}`} />}
-                                  {t}
-                                </span>
-                              );
-                            })}
-                          </div>
-                        </CardContent>
-                      </Card>
+                            <h4 className="text-lg font-bold mb-3 group-hover:text-primary transition-colors leading-snug">
+                              {project.title}
+                            </h4>
+                            <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
+                              {project.description}
+                            </p>
+                            <div className="flex flex-wrap gap-1.5 mt-auto">
+                              {project.tech.map(t => {
+                                const entry = techIconMap[t];
+                                return (
+                                  <span key={t} className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-background border border-white/10 text-xs font-mono text-muted-foreground">
+                                    {entry && <entry.icon className={`w-3 h-3 ${entry.color}`} />}
+                                    {t}
+                                  </span>
+                                );
+                              })}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </TiltCard>
                     </motion.div>
                   ))}
                 </motion.div>
