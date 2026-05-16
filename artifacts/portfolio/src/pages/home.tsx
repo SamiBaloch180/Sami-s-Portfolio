@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Github, Linkedin, Mail, Code2, Server, Database, Wrench, ArrowRight, ExternalLink, Moon, Sun } from "lucide-react";
+import { Github, Linkedin, Mail, Code2, Server, Database, Wrench, ArrowRight, ExternalLink } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Badge } from "@/components/ui/badge";
 import { SiJavascript, SiTypescript, SiReact, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb, SiFirebase, SiDocker, SiGit, SiPostman } from "react-icons/si";
@@ -137,30 +137,7 @@ const skillCategories = {
 
 export default function Home() {
   const [activeSkillTab, setActiveSkillTab] = useState<keyof typeof skillCategories>('Frontend');
-  const [theme, setTheme] = useState('dark');
 
-  useEffect(() => {
-    const isDark = document.documentElement.classList.contains('dark') || 
-                   (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    setTheme(isDark ? 'dark' : 'light');
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-      localStorage.theme = 'dark';
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.theme = 'light';
-    }
-  };
 
   const { toast } = useToast();
   const submitContactMutation = useSubmitContact();
@@ -194,10 +171,9 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
       {/* Navbar */}
-      <nav className="glass-navbar mx-4 md:mx-auto max-w-4xl mt-4 flex items-center justify-between relative px-2 sm:px-6">
-        <div className="w-10 hidden sm:block"></div> {/* Spacer for perfect centering */}
+      <nav className="glass-navbar mt-4 flex items-center justify-center">
         <div className="flex items-center justify-center gap-4 sm:gap-8 text-sm font-medium text-muted-foreground mx-auto">
-          {['Home', 'Projects', 'Skills', 'About', 'Contact'].map((item) => (
+          {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
             <button
               key={item}
               onClick={() => scrollToSection(item === 'Skills' ? 'skills' : item.toLowerCase())}
@@ -208,13 +184,6 @@ export default function Home() {
             </button>
           ))}
         </div>
-        <button 
-          onClick={toggleTheme}
-          className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-yellow-500 hover:bg-black/10 dark:hover:bg-white/10 transition-colors flex-shrink-0"
-          aria-label="Toggle theme"
-        >
-          {theme === 'dark' ? <Moon className="w-4 h-4 fill-current" /> : <Sun className="w-4 h-4 fill-current text-orange-500" />}
-        </button>
       </nav>
 
       <main>

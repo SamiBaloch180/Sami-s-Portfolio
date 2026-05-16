@@ -311,7 +311,7 @@
 
   /* Glass Navbar */
   .glass-navbar {
-    @apply rounded-full sm:rounded-[2rem] px-6 py-4 relative z-50 transition-all duration-300;
+    @apply rounded-full sm:rounded-[2rem] px-6 py-4 fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300;
   }
 
   /* Frosted Noise Overlay */
