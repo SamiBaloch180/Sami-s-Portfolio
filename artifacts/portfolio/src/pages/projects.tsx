@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Github, ExternalLink, ArrowLeft, Code2 } from "lucide-react";
+import { Github, Linkedin, ExternalLink, ArrowLeft, Code2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -264,11 +264,11 @@ export default function Projects() {
             © 2026 Sami Hassan. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-github-footer">
+            <a href="https://github.com/SamiBaloch180" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-github-footer">
               <Github className="w-5 h-5" />
             </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-linkedin-footer">
-              <ExternalLink className="w-5 h-5" />
+            <a href="https://www.linkedin.com/in/sami-hassan-a47ab127a/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-linkedin-footer">
+              <Linkedin className="w-5 h-5" />
             </a>
           </div>
         </div>

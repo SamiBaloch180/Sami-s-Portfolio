@@ -401,11 +401,11 @@ export default function Home() {
             © 2026 Sami Hassan. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-github">
+            <a href="https://github.com/SamiBaloch180" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-github">
               <Github className="w-5 h-5" />
               <span className="sr-only">GitHub</span>
             </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-linkedin">
+            <a href="https://www.linkedin.com/in/sami-hassan-a47ab127a/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-linkedin">
               <Linkedin className="w-5 h-5" />
               <span className="sr-only">LinkedIn</span>
             </a>
