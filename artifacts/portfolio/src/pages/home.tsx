@@ -183,7 +183,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
       {/* Navbar */}
-      <nav className={`glass-navbar ${scrolled ? 'scrolled' : ''} max-md:left-auto max-md:right-4 max-md:translate-x-0 max-md:w-14 max-md:h-14 max-md:p-0 max-md:flex max-md:items-center max-md:justify-center`}>
+      <nav className={`glass-navbar ${scrolled ? 'scrolled' : ''}`}>
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center justify-center gap-4 sm:gap-8 text-sm font-medium text-muted-foreground mx-auto">
           {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
@@ -214,7 +214,7 @@ export default function Home() {
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="fixed top-[80px] right-4 w-48 rounded-3xl p-6 flex flex-col gap-6 items-end bg-background/60 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] md:hidden z-50"
+            className="fixed top-[80px] left-1/2 -translate-x-1/2 w-[90vw] max-w-[320px] rounded-3xl p-6 flex flex-col gap-6 items-center bg-background/60 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] md:hidden z-50"
           >
             {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
               <button
@@ -223,7 +223,7 @@ export default function Home() {
                   scrollToSection(item === 'Skills' ? 'skills' : item.toLowerCase());
                   setIsMobileMenuOpen(false);
                 }}
-                className="text-muted-foreground hover:text-primary transition-colors focus:outline-none w-full py-2 text-right text-lg font-medium tracking-wide"
+                className="text-muted-foreground hover:text-primary transition-colors focus:outline-none w-full py-2 text-center text-lg font-medium tracking-wide"
               >
                 {item}
               </button>
