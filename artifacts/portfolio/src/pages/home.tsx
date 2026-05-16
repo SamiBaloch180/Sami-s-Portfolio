@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Github, Linkedin, Mail, Code2, Server, Database, Wrench, ArrowRight, ExternalLink } from "lucide-react";
+import { Github, Linkedin, Mail, Code2, Server, Database, Wrench, ArrowRight, ExternalLink, Moon } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Badge } from "@/components/ui/badge";
 import { SiJavascript, SiTypescript, SiReact, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb, SiFirebase, SiDocker, SiGit, SiPostman } from "react-icons/si";
@@ -145,22 +145,26 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
       {/* Navbar */}
-      <nav className="glass-navbar mx-4 md:mx-auto max-w-7xl mt-4 flex items-center justify-between">
-        <div className="font-mono text-xl font-bold tracking-tighter text-primary" data-testid="text-logo">
-          Sami<span className="text-foreground">Hassan</span>
-        </div>
-        <div className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-          {['Home', 'About', 'Tech Stack', 'Projects', 'Contact'].map((item) => (
+      <nav className="glass-navbar mx-4 md:mx-auto max-w-4xl mt-4 flex items-center justify-between relative px-2 sm:px-6">
+        <div className="w-10 hidden sm:block"></div> {/* Spacer for perfect centering */}
+        <div className="flex items-center justify-center gap-4 sm:gap-8 text-sm font-medium text-muted-foreground mx-auto">
+          {['Home', 'Projects', 'Skills', 'About', 'Contact'].map((item) => (
             <button
               key={item}
-              onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
+              onClick={() => scrollToSection(item === 'Skills' ? 'skills' : item.toLowerCase())}
               className="hover:text-primary transition-colors focus:outline-none"
-              data-testid={`link-${item.toLowerCase().replace(' ', '-')}`}
+              data-testid={`link-${item.toLowerCase()}`}
             >
               {item}
             </button>
           ))}
         </div>
+        <button 
+          className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-yellow-500 hover:bg-white/10 transition-colors flex-shrink-0"
+          aria-label="Toggle theme"
+        >
+          <Moon className="w-4 h-4 fill-current" />
+        </button>
       </nav>
 
       <main>
@@ -298,7 +302,7 @@ export default function Home() {
         </section>
 
         {/* Tech Stack Section */}
-        <section id="tech-stack" className="py-24">
+        <section id="skills" className="py-24">
           <div className="container mx-auto px-4 md:px-8">
             <motion.div
               initial={{ opacity: 0 }}
@@ -308,7 +312,7 @@ export default function Home() {
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-16 flex items-center gap-4" data-testid="text-tech-heading">
                 <span className="w-8 h-[2px] bg-primary"></span>
-                Tech Stack
+                Skills
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
