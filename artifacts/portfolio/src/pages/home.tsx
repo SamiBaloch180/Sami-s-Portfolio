@@ -145,23 +145,21 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
       {/* Navbar */}
-      <nav className="sticky top-0 z-50 w-full border-b border-white/5 bg-background/80 backdrop-blur-md">
-        <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-          <div className="font-mono text-xl font-bold tracking-tighter text-primary" data-testid="text-logo">
-            Sami<span className="text-foreground">Hassan</span>
-          </div>
-          <div className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-            {['Home', 'About', 'Tech Stack', 'Projects', 'Contact'].map((item) => (
-              <button
-                key={item}
-                onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
-                className="hover:text-primary transition-colors focus:outline-none"
-                data-testid={`link-${item.toLowerCase().replace(' ', '-')}`}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
+      <nav className="glass-navbar mx-4 md:mx-auto max-w-7xl mt-4 flex items-center justify-between">
+        <div className="font-mono text-xl font-bold tracking-tighter text-primary" data-testid="text-logo">
+          Sami<span className="text-foreground">Hassan</span>
+        </div>
+        <div className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
+          {['Home', 'About', 'Tech Stack', 'Projects', 'Contact'].map((item) => (
+            <button
+              key={item}
+              onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
+              className="hover:text-primary transition-colors focus:outline-none"
+              data-testid={`link-${item.toLowerCase().replace(' ', '-')}`}
+            >
+              {item}
+            </button>
+          ))}
         </div>
       </nav>
 
@@ -199,20 +197,18 @@ export default function Home() {
                 </p>
                 <div className="flex flex-wrap items-center gap-4">
                   <Link href="/projects">
-                    <Button size="lg" className="font-semibold" data-testid="button-view-projects">
+                    <button className="glass-button glass-noise text-primary" data-testid="button-view-projects">
                       View Projects
                       <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
+                    </button>
                   </Link>
-                  <Button
-                    size="lg"
-                    variant="outline"
+                  <button
                     onClick={() => scrollToSection('contact')}
-                    className="font-semibold hover:bg-primary/10 border-white/10"
+                    className="glass-button glass-noise"
                     data-testid="button-contact-hero"
                   >
                     Contact Me
-                  </Button>
+                  </button>
                 </div>
               </motion.div>
 
@@ -316,8 +312,8 @@ export default function Home() {
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <Card className="bg-card/50 border-white/10 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
-                  <CardContent className="p-6">
+                <div className="glass-card glass-noise h-full flex flex-col">
+                  <div className="p-6">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
                       <Code2 className="w-6 h-6 text-primary" />
                     </div>
@@ -335,11 +331,11 @@ export default function Home() {
                         </li>
                       ))}
                     </ul>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
 
-                <Card className="bg-card/50 border-white/10 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
-                  <CardContent className="p-6">
+                <div className="glass-card glass-noise h-full flex flex-col">
+                  <div className="p-6">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
                       <Server className="w-6 h-6 text-primary" />
                     </div>
@@ -355,11 +351,11 @@ export default function Home() {
                         </li>
                       ))}
                     </ul>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
 
-                <Card className="bg-card/50 border-white/10 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
-                  <CardContent className="p-6">
+                <div className="glass-card glass-noise h-full flex flex-col">
+                  <div className="p-6">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
                       <Database className="w-6 h-6 text-primary" />
                     </div>
@@ -375,11 +371,11 @@ export default function Home() {
                         </li>
                       ))}
                     </ul>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
 
-                <Card className="bg-card/50 border-white/10 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
-                  <CardContent className="p-6">
+                <div className="glass-card glass-noise h-full flex flex-col">
+                  <div className="p-6">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
                       <Wrench className="w-6 h-6 text-primary" />
                     </div>
@@ -396,8 +392,8 @@ export default function Home() {
                         </li>
                       ))}
                     </ul>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -436,11 +432,11 @@ export default function Home() {
                 >
                   {projects.filter(p => p.featured).map(project => (
                     <motion.div key={project.id} variants={cardVariants}>
-                      <Card
-                        className="bg-card/50 border-white/10 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 group"
+                      <div
+                        className="glass-card glass-noise group"
                         data-testid={`card-project-${project.id}`}
                       >
-                        <CardContent className="p-6 md:p-8">
+                        <div className="p-6 md:p-8">
                           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                             <div className="flex-1">
                               <div className="flex items-center gap-3 mb-3">
@@ -480,8 +476,8 @@ export default function Home() {
                               </a>
                             </div>
                           </div>
-                        </CardContent>
-                      </Card>
+                        </div>
+                      </div>
                     </motion.div>
                   ))}
                 </motion.div>
@@ -501,10 +497,8 @@ export default function Home() {
                 >
                   {projects.filter(p => !p.featured).map(project => (
                     <motion.div key={project.id} variants={cardVariants}>
-                      <Card
-                        className="h-full bg-card/50 border-white/10 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 group"
-                      >
-                        <CardContent className="p-6 flex flex-col h-full">
+                      <div className="glass-card glass-noise h-full flex flex-col group">
+                        <div className="p-6 flex flex-col h-full">
                           <div className="flex items-center justify-between mb-4">
                             <Badge variant="outline" className="text-primary border-primary/30 font-mono text-xs">
                               {project.category}
@@ -535,8 +529,8 @@ export default function Home() {
                               );
                             })}
                           </div>
-                        </CardContent>
-                      </Card>
+                        </div>
+                      </div>
                     </motion.div>
                   ))}
                 </motion.div>
@@ -560,8 +554,8 @@ export default function Home() {
                 </p>
               </div>
 
-              <Card className="bg-background/50 border-white/10 backdrop-blur-sm">
-                <CardContent className="p-6 md:p-8">
+              <div className="glass-card glass-noise">
+                <div className="p-6 md:p-8">
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                       <FormField
@@ -571,7 +565,7 @@ export default function Home() {
                           <FormItem>
                             <FormLabel className="text-muted-foreground">Name</FormLabel>
                             <FormControl>
-                              <Input placeholder="John Doe" className="bg-background border-white/10 focus-visible:ring-primary" {...field} data-testid="input-name" />
+                              <Input placeholder="John Doe" className="bg-white/5 border-white/10 focus-visible:ring-primary backdrop-blur-md rounded-xl text-white placeholder:text-white/40" {...field} data-testid="input-name" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -584,7 +578,7 @@ export default function Home() {
                           <FormItem>
                             <FormLabel className="text-muted-foreground">Email</FormLabel>
                             <FormControl>
-                              <Input placeholder="john@example.com" className="bg-background border-white/10 focus-visible:ring-primary" {...field} data-testid="input-email" />
+                              <Input placeholder="john@example.com" className="bg-white/5 border-white/10 focus-visible:ring-primary backdrop-blur-md rounded-xl text-white placeholder:text-white/40" {...field} data-testid="input-email" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -597,19 +591,19 @@ export default function Home() {
                           <FormItem>
                             <FormLabel className="text-muted-foreground">Message</FormLabel>
                             <FormControl>
-                              <Textarea placeholder="How can I help you?" className="min-h-[150px] bg-background border-white/10 focus-visible:ring-primary resize-none" {...field} data-testid="input-message" />
+                              <Textarea placeholder="How can I help you?" className="min-h-[150px] bg-white/5 border-white/10 focus-visible:ring-primary resize-none backdrop-blur-md rounded-xl text-white placeholder:text-white/40" {...field} data-testid="input-message" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-                      <Button type="submit" className="w-full font-semibold" disabled={submitContactMutation.isPending} data-testid="button-submit-contact">
+                      <button type="submit" className="glass-button glass-noise w-full mt-4" disabled={submitContactMutation.isPending} data-testid="button-submit-contact">
                         {submitContactMutation.isPending ? "Sending..." : "Send Message"}
-                      </Button>
+                      </button>
                     </form>
                   </Form>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>
