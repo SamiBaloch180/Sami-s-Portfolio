@@ -136,7 +136,18 @@ const skillCategories = {
 };
 
 export default function Home() {
+  
   const [activeSkillTab, setActiveSkillTab] = useState<keyof typeof skillCategories>('Frontend');
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
 
   const { toast } = useToast();
@@ -171,7 +182,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
       {/* Navbar */}
-      <nav className="glass-navbar mt-4 flex items-center justify-center">
+      <nav className={`glass-navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="flex items-center justify-center gap-4 sm:gap-8 text-sm font-medium text-muted-foreground mx-auto">
           {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
             <button
