@@ -236,7 +236,7 @@
      ========================================= */
 
   /* Base Glass properties */
-  .glass-base {
+  .glass-base, .glass-card, .glass-button, .glass-navbar {
     @apply relative overflow-hidden backdrop-blur-[20px];
     -webkit-backdrop-filter: blur(20px);
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
@@ -247,7 +247,7 @@
       inset 0 0 20px rgba(255, 255, 255, 0.05); /* soft inner glow */
   }
 
-  .dark .glass-base {
+  .dark .glass-base, .dark .glass-card, .dark .glass-button, .dark .glass-navbar {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 
@@ -257,7 +257,7 @@
   }
 
   /* Light Reflection Sweep (Shine Effect) */
-  .glass-base::before {
+  .glass-base::before, .glass-card::before, .glass-button::before, .glass-navbar::before {
     content: '';
     @apply absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 transition-opacity duration-500 ease-in-out;
     background: linear-gradient(
@@ -271,7 +271,7 @@
     transform: translateX(-100%);
   }
 
-  .dark .glass-base::before {
+  .dark .glass-base::before, .dark .glass-card::before, .dark .glass-button::before, .dark .glass-navbar::before {
     background: linear-gradient(
       105deg, 
       transparent 20%, 
@@ -281,7 +281,7 @@
     );
   }
 
-  .glass-base:hover::before {
+  .glass-base:hover::before, .glass-card:hover::before, .glass-button:hover::before, .glass-navbar:hover::before {
     @apply opacity-100;
     animation: glass-shine 1.5s infinite;
   }
@@ -293,7 +293,7 @@
 
   /* Glass Card */
   .glass-card {
-    @apply glass-base rounded-2xl sm:rounded-[2rem] transition-all duration-300 ease-out;
+    @apply rounded-2xl sm:rounded-[2rem] transition-all duration-300 ease-out;
   }
 
   .glass-card:hover {
@@ -321,7 +321,7 @@
 
   /* Glass Button */
   .glass-button {
-    @apply glass-base rounded-xl px-6 py-3 font-medium transition-all duration-300 ease-out flex items-center justify-center cursor-pointer;
+    @apply rounded-xl px-6 py-3 font-medium transition-all duration-300 ease-out flex items-center justify-center cursor-pointer;
   }
 
   .glass-button:hover {
@@ -345,7 +345,7 @@
 
   /* Glass Navbar */
   .glass-navbar {
-    @apply glass-base rounded-full sm:rounded-[2rem] px-6 py-4 sticky top-4 z-50 transition-all duration-300;
+    @apply rounded-full sm:rounded-[2rem] px-6 py-4 sticky top-4 z-50 transition-all duration-300;
   }
 
   /* Frosted Noise Overlay */
