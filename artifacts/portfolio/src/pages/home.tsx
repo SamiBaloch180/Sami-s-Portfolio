@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Github, Linkedin, Mail, Code2, Server, Database, Wrench, ArrowRight, ExternalLink } from "lucide-react";
+import { Github, Linkedin, Mail, Code2, Server, Database, Wrench, ArrowRight, ExternalLink, Menu, X } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Badge } from "@/components/ui/badge";
 import { SiJavascript, SiTypescript, SiReact, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb, SiFirebase, SiDocker, SiGit, SiPostman } from "react-icons/si";
@@ -139,6 +139,7 @@ export default function Home() {
   
   const [activeSkillTab, setActiveSkillTab] = useState<keyof typeof skillCategories>('Frontend');
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -183,7 +184,8 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
       {/* Navbar */}
       <nav className={`glass-navbar ${scrolled ? 'scrolled' : ''}`}>
-        <div className="flex items-center justify-center gap-4 sm:gap-8 text-sm font-medium text-muted-foreground mx-auto">
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center justify-center gap-4 sm:gap-8 text-sm font-medium text-muted-foreground mx-auto">
           {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
             <button
               key={item}
@@ -195,6 +197,40 @@ export default function Home() {
             </button>
           ))}
         </div>
+
+        {/* Mobile Menu Toggle */}
+        <div className="md:hidden flex items-center justify-between w-[60vw] max-w-[280px]">
+          <span className="text-sm font-semibold tracking-widest text-foreground">MENU</span>
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-1 focus:outline-none hover:text-primary transition-colors"
+            aria-label="Toggle Menu"
+          >
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+
+        {/* Mobile Menu Dropdown */}
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="fixed top-[80px] left-4 right-4 rounded-3xl p-6 flex flex-col gap-6 items-center bg-background/60 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] md:hidden z-50"
+          >
+            {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
+              <button
+                key={item}
+                onClick={() => {
+                  scrollToSection(item === 'Skills' ? 'skills' : item.toLowerCase());
+                  setIsMobileMenuOpen(false);
+                }}
+                className="text-muted-foreground hover:text-primary transition-colors focus:outline-none w-full py-2 text-center text-lg font-medium tracking-wide"
+              >
+                {item}
+              </button>
+            ))}
+          </motion.div>
+        )}
       </nav>
 
       <main>
