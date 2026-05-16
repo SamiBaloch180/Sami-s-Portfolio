@@ -9,9 +9,100 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Github, Linkedin, Mail, Code2, Server, Database, Wrench, ArrowRight } from "lucide-react";
+import { Github, Linkedin, Mail, Code2, Server, Database, Wrench, ArrowRight, ExternalLink } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Badge } from "@/components/ui/badge";
 import { SiJavascript, SiTypescript, SiReact, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb, SiFirebase, SiDocker, SiGit, SiPostman } from "react-icons/si";
+
+const techIconMap: Record<string, { icon: React.ComponentType<{ className?: string }>; color: string }> = {
+  React: { icon: SiReact, color: "text-cyan-400" },
+  "Node.js": { icon: SiNodedotjs, color: "text-green-500" },
+  MongoDB: { icon: SiMongodb, color: "text-green-400" },
+  "Tailwind CSS": { icon: SiTailwindcss, color: "text-teal-400" },
+  Firebase: { icon: SiFirebase, color: "text-orange-400" },
+  TypeScript: { icon: SiTypescript, color: "text-blue-400" },
+  "Express.js": { icon: SiExpress, color: "text-gray-300" },
+  Docker: { icon: SiDocker, color: "text-blue-500" },
+};
+
+const projects = [
+  {
+    id: 1,
+    title: "DevConnect — Developer Collaboration Platform",
+    description:
+      "A full-stack platform that connects developers for pair programming, project collaboration, and knowledge sharing. Features real-time chat, project rooms, and skill-based matching.",
+    tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+    github: "#",
+    live: "#",
+    featured: true,
+    category: "Full Stack",
+  },
+  {
+    id: 2,
+    title: "TaskFlow — Project Management App",
+    description:
+      "A Kanban-style project management tool with drag-and-drop boards, team collaboration, and real-time updates. Built with a focus on performance and clean UI.",
+    tech: ["React", "TypeScript", "Express.js", "MongoDB"],
+    github: "#",
+    live: "#",
+    featured: true,
+    category: "Full Stack",
+  },
+  {
+    id: 3,
+    title: "ShopNow — E-Commerce API",
+    description:
+      "A robust REST API for a modern e-commerce platform. Includes authentication, product management, order processing, and payment integration endpoints.",
+    tech: ["Node.js", "Express.js", "MongoDB", "Docker"],
+    github: "#",
+    live: "#",
+    featured: false,
+    category: "Backend",
+  },
+  {
+    id: 4,
+    title: "FireTrack — Real-Time Analytics Dashboard",
+    description:
+      "A live analytics dashboard that visualizes user activity and business metrics in real time. Uses Firebase for data sync and Recharts for beautiful data visualization.",
+    tech: ["React", "TypeScript", "Firebase", "Tailwind CSS"],
+    github: "#",
+    live: "#",
+    featured: false,
+    category: "Frontend",
+  },
+  {
+    id: 5,
+    title: "AuthVault — Auth Microservice",
+    description:
+      "A production-ready authentication microservice with JWT refresh tokens, OAuth2 social login, rate limiting, and role-based access control. Containerized with Docker.",
+    tech: ["Node.js", "Express.js", "MongoDB", "Docker"],
+    github: "#",
+    live: "#",
+    featured: false,
+    category: "Backend",
+  },
+  {
+    id: 6,
+    title: "PortfolioGen — Resume Builder",
+    description:
+      "A dynamic portfolio and resume generator that lets developers create stunning personal sites from a single JSON config. Exports to PDF and deploys with one click.",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Firebase"],
+    github: "#",
+    live: "#",
+    featured: false,
+    category: "Frontend",
+  },
+];
+
+const containerVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+};
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -60,7 +151,7 @@ export default function Home() {
             Sami<span className="text-foreground">Hassan</span>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-            {['Home', 'About', 'Tech Stack', 'Contact'].map((item) => (
+            {['Home', 'About', 'Tech Stack', 'Projects', 'Contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
@@ -70,13 +161,6 @@ export default function Home() {
                 {item}
               </button>
             ))}
-            <Link
-              href="/projects"
-              className="hover:text-primary transition-colors"
-              data-testid="link-projects"
-            >
-              Projects
-            </Link>
           </div>
         </div>
       </nav>
@@ -319,7 +403,147 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Contact Section */}
+        {/* Projects Section */}
+        <section id="projects" className="py-24 bg-card/30 border-y border-white/5">
+          <div className="container mx-auto px-4 md:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Code2 className="w-5 h-5 text-primary" />
+                </div>
+                <span className="text-sm font-mono text-primary uppercase tracking-widest">Portfolio</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold mb-12" data-testid="text-projects-heading">
+                My Projects
+              </h2>
+
+              {/* Featured Projects */}
+              <div className="space-y-6 mb-16">
+                <h3 className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-6">
+                  Featured
+                </h3>
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  className="space-y-6"
+                >
+                  {projects.filter(p => p.featured).map(project => (
+                    <motion.div key={project.id} variants={cardVariants}>
+                      <Card
+                        className="bg-card/50 border-white/10 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 group"
+                        data-testid={`card-project-${project.id}`}
+                      >
+                        <CardContent className="p-6 md:p-8">
+                          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-3 mb-3">
+                                <Badge variant="outline" className="text-primary border-primary/30 font-mono text-xs">
+                                  {project.category}
+                                </Badge>
+                                <Badge className="bg-primary/10 text-primary border-0 font-mono text-xs">
+                                  Featured
+                                </Badge>
+                              </div>
+                              <h3 className="text-xl md:text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+                                {project.title}
+                              </h3>
+                              <p className="text-muted-foreground leading-relaxed mb-5">
+                                {project.description}
+                              </p>
+                              <div className="flex flex-wrap gap-2">
+                                {project.tech.map(t => {
+                                  const entry = techIconMap[t];
+                                  return (
+                                    <span key={t} className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-background border border-white/10 text-xs font-mono text-muted-foreground">
+                                      {entry && <entry.icon className={`w-3.5 h-3.5 ${entry.color}`} />}
+                                      {t}
+                                    </span>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                            <div className="flex md:flex-col gap-3 md:items-end flex-shrink-0">
+                              <a href={project.github} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-sm text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
+                                <Github className="w-4 h-4" />
+                                Code
+                              </a>
+                              <a href={project.live} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors">
+                                <ExternalLink className="w-4 h-4" />
+                                Live
+                              </a>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Other Projects */}
+              <div>
+                <h3 className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-6">
+                  Other Projects
+                </h3>
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+                >
+                  {projects.filter(p => !p.featured).map(project => (
+                    <motion.div key={project.id} variants={cardVariants}>
+                      <Card
+                        className="h-full bg-card/50 border-white/10 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 group"
+                      >
+                        <CardContent className="p-6 flex flex-col h-full">
+                          <div className="flex items-center justify-between mb-4">
+                            <Badge variant="outline" className="text-primary border-primary/30 font-mono text-xs">
+                              {project.category}
+                            </Badge>
+                            <div className="flex items-center gap-2">
+                              <a href={project.github} className="text-muted-foreground hover:text-primary transition-colors">
+                                <Github className="w-4 h-4" />
+                              </a>
+                              <a href={project.live} className="text-muted-foreground hover:text-primary transition-colors">
+                                <ExternalLink className="w-4 h-4" />
+                              </a>
+                            </div>
+                          </div>
+                          <h4 className="text-lg font-bold mb-3 group-hover:text-primary transition-colors leading-snug">
+                            {project.title}
+                          </h4>
+                          <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
+                            {project.description}
+                          </p>
+                          <div className="flex flex-wrap gap-1.5 mt-auto">
+                            {project.tech.map(t => {
+                              const entry = techIconMap[t];
+                              return (
+                                <span key={t} className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-background border border-white/10 text-xs font-mono text-muted-foreground">
+                                  {entry && <entry.icon className={`w-3 h-3 ${entry.color}`} />}
+                                  {t}
+                                </span>
+                              );
+                            })}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
         <section id="contact" className="py-24 bg-card/30 border-t border-white/5">
           <div className="container mx-auto px-4 md:px-8">
             <motion.div
