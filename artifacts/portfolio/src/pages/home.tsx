@@ -185,6 +185,8 @@ export default function Home() {
       {/* Ambient orbs — fixed behind all content */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
         <div className="orb orb-purple w-[600px] h-[600px]" style={{top:'50%', left:'50%', transform: 'translate(-50%, -50%)'}} />
+        <div className="orb orb-violet w-[500px] h-[500px]" style={{top:'-10%', left:'-5%'}} />
+        <div className="orb orb-indigo w-[550px] h-[550px]" style={{bottom:'-10%', right:'-5%'}} />
       </div>
       {/* Navbar */}
       <nav className={`glass-navbar ${scrolled ? 'scrolled' : ''}`}>
