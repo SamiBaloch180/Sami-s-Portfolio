@@ -181,7 +181,11 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30 relative">
+      {/* Ambient orbs — fixed behind all content */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+        <div className="orb orb-purple w-[600px] h-[600px]" style={{top:'50%', left:'50%', transform: 'translate(-50%, -50%)'}} />
+      </div>
       {/* Navbar */}
       <nav className={`glass-navbar ${scrolled ? 'scrolled' : ''}`}>
         {/* Desktop Menu */}
@@ -234,7 +238,7 @@ export default function Home() {
 
       <main>
         {/* Hero Section */}
-        <section id="home" className="min-h-[calc(100vh-4rem)] flex items-center pt-16 pb-24">
+        <section id="home" className="min-h-[calc(100vh-4rem)] flex items-center pt-16 pb-24 relative z-10">
           <div className="container mx-auto px-4 md:px-8">
             <div className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16">
               {/* Text */}
@@ -244,16 +248,16 @@ export default function Home() {
                 transition={{ duration: 0.6 }}
                 className="flex-1"
               >
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6" data-testid="badge-availability">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6" data-testid="badge-availability">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                   </span>
                   Available for opportunities
                 </div>
-                <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4" data-testid="text-hero-heading">
+                <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 leading-[1.05]" data-testid="text-hero-heading">
                   Hi, I'm{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-300">
+                  <span className="text-primary">
                     Sami Hassan
                   </span>
                 </h1>
@@ -265,15 +269,13 @@ export default function Home() {
                   Bridging the gap between robust backend systems and intuitive user interfaces.
                 </p>
                 <div className="flex flex-wrap items-center gap-4">
-                  <Link href="/projects">
-                    <button className="glass-button glass-noise text-primary" data-testid="button-view-projects">
-                      View Projects
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </button>
-                  </Link>
+                  <button className="glow-btn" onClick={() => scrollToSection('projects')} data-testid="button-view-projects">
+                    View Projects
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
                   <button
                     onClick={() => scrollToSection('contact')}
-                    className="glass-button glass-noise"
+                    className="glass-outline-btn"
                     data-testid="button-contact-hero"
                   >
                     Contact Me
@@ -289,7 +291,7 @@ export default function Home() {
                 className="flex-shrink-0"
               >
                 <div className="relative">
-                  <div className="absolute -inset-4 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-2xl rounded-3xl" />
+                  <div className="absolute -inset-4 bg-primary/20 blur-2xl rounded-3xl" />
                   <img
                     src="/sami.png"
                     alt="Sami Hassan"
@@ -301,6 +303,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+
 
         {/* About Section */}
         <section id="about" className="py-24 bg-card/30 border-y border-white/5">
@@ -355,7 +358,7 @@ export default function Home() {
                   </p>
                   <div className="flex flex-wrap gap-3 pt-2">
                     {['Problem Solver', 'Clean Code', 'Scalable Systems', 'Continuous Learner'].map(tag => (
-                      <span key={tag} className="px-3 py-1 rounded-full text-sm font-mono bg-primary/10 text-primary border border-primary/20">
+                      <span key={tag} className="glass-tag">
                         {tag}
                       </span>
                     ))}
@@ -381,7 +384,7 @@ export default function Home() {
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="glass-card glass-noise h-full flex flex-col">
+                <div className="glass-card glass-noise flex flex-col">
                   <div className="p-6">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
                       <Code2 className="w-6 h-6 text-primary" />
@@ -403,7 +406,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="glass-card glass-noise h-full flex flex-col">
+                <div className="glass-card glass-noise flex flex-col">
                   <div className="p-6">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
                       <Server className="w-6 h-6 text-primary" />
@@ -423,7 +426,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="glass-card glass-noise h-full flex flex-col">
+                <div className="glass-card glass-noise flex flex-col">
                   <div className="p-6">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
                       <Database className="w-6 h-6 text-primary" />
@@ -443,7 +446,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="glass-card glass-noise h-full flex flex-col">
+                <div className="glass-card glass-noise flex flex-col">
                   <div className="p-6">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
                       <Wrench className="w-6 h-6 text-primary" />
@@ -526,7 +529,7 @@ export default function Home() {
                                 {project.tech.map(t => {
                                   const entry = techIconMap[t];
                                   return (
-                                    <span key={t} className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-background border border-white/10 text-xs font-mono text-muted-foreground">
+                                    <span key={t} className="glass-tag">
                                       {entry && <entry.icon className={`w-3.5 h-3.5 ${entry.color}`} />}
                                       {t}
                                     </span>
@@ -591,7 +594,7 @@ export default function Home() {
                             {project.tech.map(t => {
                               const entry = techIconMap[t];
                               return (
-                                <span key={t} className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-background border border-white/10 text-xs font-mono text-muted-foreground">
+                                <span key={t} className="glass-tag">
                                   {entry && <entry.icon className={`w-3 h-3 ${entry.color}`} />}
                                   {t}
                                 </span>
@@ -666,7 +669,7 @@ export default function Home() {
                           </FormItem>
                         )}
                       />
-                      <button type="submit" className="glass-button glass-noise w-full mt-4" disabled={submitContactMutation.isPending} data-testid="button-submit-contact">
+                      <button type="submit" className="gradient-btn w-full mt-4" disabled={submitContactMutation.isPending} data-testid="button-submit-contact">
                         {submitContactMutation.isPending ? "Sending..." : "Send Message"}
                       </button>
                     </form>
@@ -687,17 +690,17 @@ export default function Home() {
           <p className="text-sm text-muted-foreground" data-testid="text-footer-copyright">
             © 2026 Sami Hassan. All rights reserved.
           </p>
-          <div className="flex items-center gap-4">
-            <a href="https://github.com/SamiBaloch180" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-github">
-              <Github className="w-5 h-5" />
+          <div className="flex items-center gap-3">
+            <a href="https://github.com/SamiBaloch180" target="_blank" rel="noopener noreferrer" className="social-glass" data-testid="link-github">
+              <Github className="w-4 h-4" />
               <span className="sr-only">GitHub</span>
             </a>
-            <a href="https://www.linkedin.com/in/sami-hassan-a47ab127a/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-linkedin">
-              <Linkedin className="w-5 h-5" />
+            <a href="https://www.linkedin.com/in/sami-hassan-a47ab127a/" target="_blank" rel="noopener noreferrer" className="social-glass" data-testid="link-linkedin">
+              <Linkedin className="w-4 h-4" />
               <span className="sr-only">LinkedIn</span>
             </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-email">
-              <Mail className="w-5 h-5" />
+            <a href="#" className="social-glass" data-testid="link-email">
+              <Mail className="w-4 h-4" />
               <span className="sr-only">Email</span>
             </a>
           </div>
