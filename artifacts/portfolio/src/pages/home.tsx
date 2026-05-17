@@ -639,7 +639,7 @@ export default function Home() {
                           <FormItem>
                             <FormLabel className="text-muted-foreground">Name</FormLabel>
                             <FormControl>
-                              <Input placeholder="John Doe" className="bg-white/5 border-white/10 focus-visible:ring-primary backdrop-blur-md rounded-xl text-white placeholder:text-white/40" {...field} data-testid="input-name" />
+                              <Input placeholder="John Doe" className="glass-input rounded-xl text-white placeholder:text-white/40 h-12 px-4" {...field} data-testid="input-name" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -652,7 +652,7 @@ export default function Home() {
                           <FormItem>
                             <FormLabel className="text-muted-foreground">Email</FormLabel>
                             <FormControl>
-                              <Input placeholder="john@example.com" className="bg-white/5 border-white/10 focus-visible:ring-primary backdrop-blur-md rounded-xl text-white placeholder:text-white/40" {...field} data-testid="input-email" />
+                              <Input placeholder="john@example.com" className="glass-input rounded-xl text-white placeholder:text-white/40 h-12 px-4" {...field} data-testid="input-email" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -665,13 +665,13 @@ export default function Home() {
                           <FormItem>
                             <FormLabel className="text-muted-foreground">Message</FormLabel>
                             <FormControl>
-                              <Textarea placeholder="How can I help you?" className="min-h-[150px] bg-white/5 border-white/10 focus-visible:ring-primary resize-none backdrop-blur-md rounded-xl text-white placeholder:text-white/40" {...field} data-testid="input-message" />
+                              <Textarea placeholder="How can I help you?" className="glass-input min-h-[150px] resize-none rounded-xl text-white placeholder:text-white/40 p-4" {...field} data-testid="input-message" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-                      <button type="submit" className="gradient-btn w-full mt-4" disabled={submitContactMutation.isPending} data-testid="button-submit-contact">
+                      <button type="submit" className="glow-btn w-full mt-6" disabled={submitContactMutation.isPending} data-testid="button-submit-contact">
                         {submitContactMutation.isPending ? "Sending..." : "Send Message"}
                       </button>
                     </form>
